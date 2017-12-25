@@ -27,9 +27,9 @@ void sonar_callback(const sonar_simulation::sonars& data)
 		range.max_range = range_max;
 		if (data.sonar_list[k].range < safe_range)
 		{
-			if(0 == data.sonar_list[k].range) 
-                                range.range = 0.2;
-			else
+			// if(0 == data.sonar_list[k].range) 
+   //                              range.range = 0.2;
+			// else
                                 range.range = data.sonar_list[k].range;
 		}
 		else range.range = 8;
