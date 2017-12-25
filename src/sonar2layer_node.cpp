@@ -28,9 +28,9 @@ void sonar_callback(const sonar_simulation::sonars& data)
 		if (data.sonar_list[k].range < safe_range)
 		{
 			if(0 == data.sonar_list[k].range) 
-				range.range = range_min;
+                                range.range = 0.2;
 			else
-				range.range = data.sonar_list[k].range*0.5;
+                                range.range = data.sonar_list[k].range;
 		}
 		else range.range = 8;
 		sonar_pubs[k].publish(range);
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 	{
 		
 		index << "sonar_" << i;
-		sonar_pubs.push_back(n.advertise<sensor_msgs::Range>(index.str(), 10));
+                sonar_pubs.push_back(n.advertise<sensor_msgs::Range>(index.str(), 20));
 		index.str("");
 	}
 
