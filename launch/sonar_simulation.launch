@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="sonar_simulation" name="sonar_simulation" type="sonar_simulation" output="screen"/>
+	<node pkg="sonar_simulation" name="sonar2layer" type="sonar2layer" output="screen"/>
+</launch>
