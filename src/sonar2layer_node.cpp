@@ -27,12 +27,19 @@ void sonar_callback(const sonar_simulation::sonars& data)
 		range.max_range = range_max;
 		if (data.sonar_list[k].range < safe_range)
 		{
-			// if(0 == data.sonar_list[k].range) 
-   //                              range.range = 0.2;
-			// else
-                                range.range = data.sonar_list[k].range;
+			if(0 == data.sonar_list[k].range) 
+			{
+				range.range = 0.2f;
+			}else
+			{
+				float sonarRange = (float)data.sonar_list[k].range;
+				range.range = sonarRange/2;
+			}                                
 		}
-		else range.range = 8;
+		else
+		{
+			range.range = 8;
+		} 
 		sonar_pubs[k].publish(range);
 	}
 }
