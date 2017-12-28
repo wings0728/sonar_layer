@@ -7,7 +7,7 @@
 
 #define MATH_PI 3.141592653589793
 
-int sonar_number = 12;
+int sonar_number = 8;
 std::vector<ros::Publisher> sonar_pubs;
 float range_min = 0.2; //in meters
 float range_max = 4; //in meters
@@ -26,20 +26,8 @@ void sonar_callback(const sonar_simulation::sonars& data)
 		range.min_range = range_min;
 		range.max_range = range_max;
 		if (data.sonar_list[k].range < safe_range)
-		{
-			if(0 == data.sonar_list[k].range) 
-			{
-				range.range = 0.5f;
-			}else
-			{
-				float sonarRange = (float)(data.sonar_list[k].range);
-				range.range = sonarRange*0.22f;
-			}                                
-		}
-		else
-		{
-			range.range = 8.0f;
-		} 
+			range.range = data.sonar_list[k].range;
+		else range.range = 8;
 		sonar_pubs[k].publish(range);
 	}
 }
@@ -55,16 +43,13 @@ int main(int argc, char **argv)
 	{
 		
 		index << "sonar_" << i;
-                sonar_pubs.push_back(n.advertise<sensor_msgs::Range>(index.str(), 20));
+		sonar_pubs.push_back(n.advertise<sensor_msgs::Range>(index.str(), 10));
 		index.str("");
 	}
-
-        ros::Rate r(30);
 
 	while (n.ok())
 	{
 		ros::spinOnce();
-		r.sleep();
 	}
 
 	return 0;
