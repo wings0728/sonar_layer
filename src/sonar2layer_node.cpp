@@ -27,14 +27,15 @@ void sonar_callback(const sonar_simulation::sonars& data)
 		range.max_range = range_max;
 		if (data.sonar_list[k].range < safe_range)
 		{
-			if(0 == data.sonar_list[k].range) 
-			{
-				range.range = 0.5f;
-			}else
-			{
-				float sonarRange = (float)(data.sonar_list[k].range);
-				range.range = (sonarRange + 1)*0.22f;
-			}                                
+			range.range = 1;
+			// if(0 == data.sonar_list[k].range) 
+			// {
+			// 	range.range = range_min;
+			// }else
+			// {
+			// 	float sonarRange = (float)(data.sonar_list[k].range);
+			// 	range.range = (sonarRange + 1)*0.22f;
+			// }                                
 		}
 		else
 		{
