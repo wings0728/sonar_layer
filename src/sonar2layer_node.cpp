@@ -59,9 +59,12 @@ int main(int argc, char **argv)
 		index.str("");
 	}
 
+        ros::Rate r(30);
+
 	while (n.ok())
 	{
 		ros::spinOnce();
+		r.sleep();
 	}
 
 	return 0;
