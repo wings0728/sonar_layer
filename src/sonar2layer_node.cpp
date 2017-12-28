@@ -11,7 +11,7 @@ int sonar_number = 12;
 std::vector<ros::Publisher> sonar_pubs;
 float range_min = 0.2; //in meters
 float range_max = 4; //in meters
-float field_of_view = MATH_PI / 4.0; // in radian
+float field_of_view = MATH_PI / 2.0; // in radian
 float safe_range = 6; //in meters
 
 void sonar_callback(const sonar_simulation::sonars& data)
