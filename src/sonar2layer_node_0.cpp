@@ -33,12 +33,12 @@ void sonar_callback(const sonar_simulation::sonars& data)
 			}else
 			{
 				float sonarRange = (float)(data.sonar_list[k].range);
-				range.range = (sonarRange + 1)*0.22f;
+				range.range = sonarRange*0.22f;
 			}                                
 		}
 		else
 		{
-			range.range = range_max;
+			range.range = 8.0f;
 		} 
 		sonar_pubs[k].publish(range);
 	}
