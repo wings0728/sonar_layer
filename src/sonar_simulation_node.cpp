@@ -6,7 +6,7 @@
 #include "sonar_simulation/sonars.h"
 
 int sonar_num = 12;
-unsigned char sonarsBuf[sonar_num] = {0};
+unsigned char sonarsBuf[12] = {0};
 void sonarsCallback(const sensor_msgs::Imu& sonars_msg)
 {
 	unsigned char idx_ = 0;
@@ -50,13 +50,13 @@ int main(int argc, char **argv)
 	}
 
 	
-	ros::Rate r(10); // set the loop rate as 1Hz
+	ros::Rate r(30);
 
 	while (n.ok())
 	{
 
 		snr.header.stamp = ros::Time::now();
-		for(unsigned char idx_ = 0; idx_ < sonar_num; idx_ ++)
+		for(int idx_ = 0; idx_ < sonar_num; idx_ ++)
 		{
 			ss[idx_].range = sonarsBuf[idx_];
 		}
