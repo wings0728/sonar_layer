@@ -7,7 +7,7 @@
 
 #define MATH_PI 3.141592653589793
 
-int sonar_number = 8;
+int sonar_number = 12;
 std::vector<ros::Publisher> sonar_pubs;
 float range_min = 0.2; //in meters
 float range_max = 4; //in meters
