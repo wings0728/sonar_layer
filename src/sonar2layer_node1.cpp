@@ -7,11 +7,11 @@
 
 #define MATH_PI 3.141592653589793
 
-int sonar_number = 8;
+int sonar_number = 12;
 std::vector<ros::Publisher> sonar_pubs;
 float range_min = 0.2; //in meters
 float range_max = 4; //in meters
-float field_of_view = MATH_PI / 4.0; // in radian
+float field_of_view = MATH_PI / 2.0; // in radian
 float safe_range = 6; //in meters
 
 void sonar_callback(const sonar_simulation::sonars& data)
@@ -26,8 +26,21 @@ void sonar_callback(const sonar_simulation::sonars& data)
 		range.min_range = range_min;
 		range.max_range = range_max;
 		if (data.sonar_list[k].range < safe_range)
-			range.range = data.sonar_list[k].range;
-		else range.range = 8;
+		{
+			range.range = 1;
+			// if(0 == data.sonar_list[k].range) 
+			// {
+			// 	range.range = range_min;
+			// }else
+			// {
+			// 	float sonarRange = (float)(data.sonar_list[k].range);
+			// 	range.range = (sonarRange + 1)*0.22f;
+			// }                                
+		}
+		else
+		{
+			range.range = range_max;
+		} 
 		sonar_pubs[k].publish(range);
 	}
 }
@@ -43,13 +56,16 @@ int main(int argc, char **argv)
 	{
 		
 		index << "sonar_" << i;
-		sonar_pubs.push_back(n.advertise<sensor_msgs::Range>(index.str(), 10));
+                sonar_pubs.push_back(n.advertise<sensor_msgs::Range>(index.str(), 20));
 		index.str("");
 	}
+
+        ros::Rate r(30);
 
 	while (n.ok())
 	{
 		ros::spinOnce();
+		r.sleep();
 	}
 
 	return 0;
