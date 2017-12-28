@@ -29,11 +29,11 @@ void sonar_callback(const sonar_simulation::sonars& data)
 		{
 			if(0 == data.sonar_list[k].range) 
 			{
-				range.range = 0.2f;
+				range.range = 0.5f;
 			}else
 			{
 				float sonarRange = (float)(data.sonar_list[k].range);
-				range.range = sonarRange/0.18f;
+				range.range = sonarRange*0.22f;
 			}                                
 		}
 		else
